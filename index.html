@@ -1,16 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mingda Liu - Graduate student at BUAA, researching LLM, Agent, and Vision-Language Models">
   <title>Mingda Liu | AI Research</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #34495e;
+      --accent-color: #3498db;
+      --text-color: #333;
+      --text-light: #666;
+      --bg-color: #ffffff;
+      --bg-light: #f8f9fa;
+      --border-color: #e1e8ed;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 60px;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--accent-color), #9b59b6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      color: white;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .avatar:hover {
+      transform: scale(1.05);
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--primary-color);
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .bio {
+      font-size: 16px;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 24px auto 0;
+      line-height: 1.8;
+    }
+
+    /* Navigation */
+    nav {
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    nav a {
+      display: inline-block;
+      margin: 0 16px;
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 15px;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--accent-color);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 60px;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--primary-color);
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    /* Research Interests */
+    .interests {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .interest-card {
+      background: var(--bg-light);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .interest-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-color);
+    }
+
+    .interest-card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--primary-color);
+    }
+
+    .interest-card p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Links */
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .link-item {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 20px;
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      font-size: 15px;
+    }
+
+    .link-item:hover {
+      background: var(--accent-color);
+      color: white;
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .link-item svg {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      margin-top: 80px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-light);
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+      }
+
+      .interests {
+        grid-template-columns: 1fr;
+      }
+
+      nav a {
+        margin: 0 8px;
+        font-size: 14px;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+    }
+
+    /* Dark mode support (optional) */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #ecf0f1;
+        --secondary-color: #bdc3c7;
+        --text-color: #ecf0f1;
+        --text-light: #95a5a6;
+        --bg-color: #1a1a1a;
+        --bg-light: #2d2d2d;
+        --border-color: #3a3a3a;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hi, I'm Mingda Liu 👋</h1>
-  <p>Graduate student at BUAA</p>
-  <p>Research Interests: LLM, Agent, Vision-Language Models</p>
+  <div class="container">
+    <header>
+      <div class="avatar">ML</div>
+      <h1>Mingda Liu</h1>
+      <p class="subtitle">Graduate Student at BUAA</p>
+      <p class="bio">
+        专注于人工智能研究，特别是大语言模型、智能体和视觉-语言模型的前沿探索。
+        致力于推动 AI 技术的发展与应用。
+      </p>
+    </header>
 
-  <p>
-    GitHub: <a href="https://github.com/ailmd">ailmd</a>
-  </p>
+    <nav>
+      <a href="#research">研究</a>
+      <a href="#interests">兴趣</a>
+      <a href="#contact">联系</a>
+    </nav>
+
+    <section id="research">
+      <h2>研究领域</h2>
+      <div class="interests">
+        <div class="interest-card">
+          <h3>大语言模型</h3>
+          <p>探索大语言模型的架构优化、训练方法和应用场景，关注模型效率与性能的平衡。</p>
+        </div>
+        <div class="interest-card">
+          <h3>智能体</h3>
+          <p>研究 AI 智能体的决策机制、多智能体协作和自主学习能力，推动智能体系统的实际应用。</p>
+        </div>
+        <div class="interest-card">
+          <h3>视觉-语言模型</h3>
+          <p>专注于多模态理解与生成，研究视觉与语言信息的深度融合，提升模型的跨模态能力。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="interests">
+      <h2>研究兴趣</h2>
+      <p style="color: var(--text-light); line-height: 1.8; margin-top: 16px;">
+        <strong>LLM (Large Language Models)</strong> - 大语言模型的预训练、微调和推理优化<br>
+        <strong>Agent</strong> - 智能体的规划、工具使用和长期记忆机制<br>
+        <strong>Vision-Language Models</strong> - 视觉-语言多模态模型的架构设计与应用
+      </p>
+    </section>
+
+    <section id="contact">
+      <h2>联系方式</h2>
+      <div class="links">
+        <a href="https://github.com/ailmd" class="link-item" target="_blank" rel="noopener noreferrer">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="mailto:your.email@example.com" class="link-item">
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+          邮箱
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Mingda Liu. Built with simplicity and elegance.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add fade-in animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('section').forEach(section => {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(20px)';
+      section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      observer.observe(section);
+    });
+  </script>
 </body>
 </html>
