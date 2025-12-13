@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mingda Liu - Internship Detail">
+  <title>实习详情 | Mingda Liu</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="avatar">ML</div>
+      <div class="pixel-name" id="pixelName"></div>
+      <p class="subtitle">Internship Detail</p>
+    </header>
+
+    <nav>
+      <a href="index.html">首页</a>
+      <a href="index.html#research">研究</a>
+      <a href="index.html#interests">兴趣</a>
+      <a href="internship.html">实习</a>
+      <a href="index.html#contact">联系</a>
+    </nav>
+
+    <section>
+      <a href="internship.html" class="back-link">← 返回实习列表</a>
+      
+      <div class="detail-content" id="detailContent">
+        <h2 id="internshipTitle">实习详情</h2>
+        
+        <!-- 内容区域 - 稍后可以在这里添加具体内容 -->
+        <div id="internshipContent">
+          <p>这里将显示实习的详细信息...</p>
+          <p>您可以通过修改此文件来添加具体内容。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 Mingda Liu. Built with simplicity and elegance.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // 根据URL参数加载不同的实习内容
+    const urlParams = new URLSearchParams(window.location.search);
+    const internshipId = urlParams.get('id');
+    
+    // 这里可以根据id加载不同的内容
+    // 目前先显示占位内容
+    if (internshipId) {
+      const titleElement = document.getElementById('internshipTitle');
+      const contentElement = document.getElementById('internshipContent');
+      
+      // 可以根据id设置不同的标题和内容
+      const internships = {
+        '1': {
+          title: '实习一详情',
+          content: '<p>这是实习一的详细信息。</p><p>您可以在这里添加具体的工作内容、时间、职责等信息。</p>'
+        },
+        '2': {
+          title: '实习二详情',
+          content: '<p>这是实习二的详细信息。</p><p>您可以在这里添加具体的工作内容、时间、职责等信息。</p>'
+        },
+        '3': {
+          title: '实习三详情',
+          content: '<p>这是实习三的详细信息。</p><p>您可以在这里添加具体的工作内容、时间、职责等信息。</p>'
+        }
+      };
+      
+      const internship = internships[internshipId];
+      if (internship) {
+        titleElement.textContent = internship.title;
+        contentElement.innerHTML = internship.content;
+      }
+    }
+  </script>
+</body>
+</html>
+
