@@ -137,7 +137,7 @@ header::after {
    像素风名字动画
    ============================================ */
 .pixel-name {
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
   font-size: 32px;
   margin-bottom: 20px;
   color: var(--primary-color);
@@ -147,17 +147,23 @@ header::after {
     0 0 30px var(--glow-color);
   letter-spacing: 4px;
   display: inline-block;
-  min-height: 50px;
+  min-height: 60px;
+  line-height: 1.5;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 .pixel-name .char {
   display: inline-block;
   opacity: 1;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
+  min-width: 0.5em;
 }
 
 .pixel-name .char.hidden {
   opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 h1 {

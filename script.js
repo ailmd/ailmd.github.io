@@ -9,44 +9,62 @@ function initPixelNameAnimation() {
   const chars = fullName.split('');
   let currentIndex = 0;
   let isHiding = false;
-  let animationInterval;
+  let animationInterval = null;
+  let waitTimeout = null;
+  let isWaiting = false;
 
   function createNameElement() {
     nameElement.innerHTML = '';
-    chars.forEach((char, index) => {
+    chars.forEach((char) => {
       const span = document.createElement('span');
-      span.className = 'char';
+      span.className = 'char hidden'; // 初始状态全部隐藏
       span.textContent = char === ' ' ? '\u00A0' : char;
       nameElement.appendChild(span);
     });
+    currentIndex = 0;
+    isHiding = false;
+    isWaiting = false;
   }
 
   function animateName() {
+    // 如果正在等待，不执行动画
+    if (isWaiting) return;
+    
     const charElements = nameElement.querySelectorAll('.char');
     
     if (!isHiding) {
       // 逐字显示
       if (currentIndex < chars.length) {
-        charElements[currentIndex].classList.remove('hidden');
+        if (charElements[currentIndex]) {
+          charElements[currentIndex].classList.remove('hidden');
+        }
         currentIndex++;
       } else {
         // 显示完成后等待一段时间再开始隐藏
-        setTimeout(() => {
+        isWaiting = true;
+        if (waitTimeout) clearTimeout(waitTimeout);
+        waitTimeout = setTimeout(() => {
           isHiding = true;
           currentIndex = chars.length - 1;
+          isWaiting = false;
         }, 2000);
       }
     } else {
       // 逐字隐藏
       if (currentIndex >= 0) {
-        charElements[currentIndex].classList.add('hidden');
+        if (charElements[currentIndex]) {
+          charElements[currentIndex].classList.add('hidden');
+        }
         currentIndex--;
       } else {
         // 隐藏完成后重新开始显示
-        isHiding = false;
-        currentIndex = 0;
-        setTimeout(() => {
+        isWaiting = true;
+        if (waitTimeout) clearTimeout(waitTimeout);
+        waitTimeout = setTimeout(() => {
+          isHiding = false;
+          currentIndex = 0;
           createNameElement();
+          isWaiting = false;
         }, 500);
       }
     }
@@ -55,8 +73,8 @@ function initPixelNameAnimation() {
   // 初始化
   createNameElement();
   
-  // 开始动画
-  animationInterval = setInterval(animateName, 150);
+  // 开始动画 - 使用更短的间隔让动画更流畅
+  animationInterval = setInterval(animateName, 120);
 }
 
 // ============================================
