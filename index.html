@@ -3,129 +3,322 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mingda Liu - Graduate student at BUAA, researching LLM, Agent, and Vision-Language Models">
-  <title>Mingda Liu | Personal Blog</title>
+  <meta name="description" content="Mingda Liu - AI Researcher | LLM, Agent, Vision-Language Models">
+  <title>Mingda Liu | AI Researcher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="avatar-wrapper">
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-avatar">
+        <div class="avatar-glow-ring"></div>
         <div class="avatar">ML</div>
-        <div class="avatar-glow"></div>
       </div>
-      <div class="pixel-name" id="pixelName"></div>
-      <p class="subtitle">Graduate Student at BUAA</p>
-      <p class="bio">
-        专注于人工智能研究，特别是大语言模型、智能体和视觉-语言模型的前沿探索。
-        致力于推动 AI 技术的发展与应用。
-      </p>
-    </header>
-
-    <nav>
-      <a href="#about">关于</a>
-      <a href="#research">研究</a>
-      <a href="#blog">博客</a>
-      <a href="internship.html">实习</a>
-      <a href="life.html">生活</a>
-      <a href="#contact">联系</a>
-    </nav>
-
-    <section id="about" class="fade-in">
-      <h2><span class="section-icon">></span> 关于我</h2>
-      <div class="about-content">
-        <p>我是一名专注于人工智能研究的硕士研究生，对前沿技术充满热情。我的研究兴趣涵盖大语言模型、智能体系统和多模态学习等领域。</p>
-        <div class="skills">
-          <span class="skill-tag">LLM</span>
-          <span class="skill-tag">Agent</span>
-          <span class="skill-tag">Vision-Language</span>
-          <span class="skill-tag">Deep Learning</span>
-          <span class="skill-tag">Python</span>
-        </div>
+      <h1 class="hero-name">
+        <span class="pixel-name" id="pixelName"></span>
+      </h1>
+      <p class="hero-subtitle">AI Researcher & Graduate Student</p>
+      <p class="hero-tagline">Exploring the frontiers of Large Language Models, AI Agents, and Vision-Language Systems</p>
+      <div class="hero-links">
+        <a href="#about" class="hero-link">About</a>
+        <a href="#research" class="hero-link">Research</a>
+        <a href="#projects" class="hero-link">Projects</a>
+        <a href="#blog" class="hero-link">Blog</a>
       </div>
-    </section>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-    <section id="research" class="fade-in">
-      <h2><span class="section-icon">></span> 研究领域</h2>
-      <div class="interests">
-        <div class="interest-card">
-          <div class="card-icon">🧠</div>
-          <h3>大语言模型</h3>
-          <p>探索大语言模型的架构优化、训练方法和应用场景，关注模型效率与性能的平衡。</p>
-        </div>
-        <div class="interest-card">
-          <div class="card-icon">🤖</div>
-          <h3>智能体</h3>
-          <p>研究 AI 智能体的决策机制、多智能体协作和自主学习能力，推动智能体系统的实际应用。</p>
-        </div>
-        <div class="interest-card">
-          <div class="card-icon">👁️</div>
-          <h3>视觉-语言模型</h3>
-          <p>专注于多模态理解与生成，研究视觉与语言信息的深度融合，提升模型的跨模态能力。</p>
-        </div>
+  <!-- Navigation -->
+  <nav class="main-nav" id="mainNav">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">ML</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
       </div>
-    </section>
+    </div>
+  </nav>
 
-    <section id="blog" class="fade-in">
-      <h2><span class="section-icon">></span> 最新文章</h2>
-      <div class="blog-list">
-        <article class="blog-card">
-          <div class="blog-date">2024.01</div>
-          <h3><a href="#">大语言模型在智能体系统中的应用</a></h3>
-          <p>探讨如何将大语言模型集成到智能体系统中，实现更智能的决策和规划能力...</p>
-          <div class="blog-tags">
-            <span>LLM</span>
-            <span>Agent</span>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- About Section -->
+    <section id="about" class="content-section">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2 class="section-title">About Me</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="section-content">
+        <div class="about-grid">
+          <div class="about-text">
+            <p class="about-intro">
+              I am a graduate student at BUAA, dedicated to advancing the field of artificial intelligence through research in Large Language Models, AI Agents, and Vision-Language systems.
+            </p>
+            <p class="about-detail">
+              My research focuses on exploring the architectural optimization, training methodologies, and practical applications of large-scale language models. I am particularly interested in the intersection of AI agents and multimodal learning, aiming to develop more intelligent and capable AI systems.
+            </p>
           </div>
-        </article>
-        <article class="blog-card">
-          <div class="blog-date">2024.02</div>
-          <h3><a href="#">多模态学习的挑战与机遇</a></h3>
-          <p>分析当前多模态学习领域面临的主要挑战，以及未来可能的发展方向...</p>
-          <div class="blog-tags">
-            <span>Vision-Language</span>
-            <span>Multimodal</span>
+          <div class="about-skills">
+            <h3>Research Interests</h3>
+            <div class="skills-grid">
+              <span class="skill-item">Large Language Models</span>
+              <span class="skill-item">AI Agents</span>
+              <span class="skill-item">Vision-Language Models</span>
+              <span class="skill-item">Multimodal Learning</span>
+              <span class="skill-item">Deep Learning</span>
+              <span class="skill-item">Neural Architecture</span>
+            </div>
           </div>
-        </article>
-        <article class="blog-card">
-          <div class="blog-date">2024.03</div>
-          <h3><a href="#">AI 研究中的思考与实践</a></h3>
-          <p>分享在 AI 研究过程中的一些思考、经验和实践心得...</p>
-          <div class="blog-tags">
-            <span>Research</span>
-            <span>AI</span>
-          </div>
-        </article>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="fade-in">
-      <h2><span class="section-icon">></span> 联系方式</h2>
-      <div class="links">
-        <a href="https://github.com/ailmd" class="link-item" target="_blank" rel="noopener noreferrer">
-          <svg fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          GitHub
-        </a>
-        <a href="mailto:your.email@example.com" class="link-item">
-          <svg fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-          </svg>
-          邮箱
-        </a>
+    <!-- Research Section -->
+    <section id="research" class="content-section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2 class="section-title">Research</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="section-content">
+        <div class="research-grid">
+          <article class="research-card">
+            <div class="card-header">
+              <span class="card-number">01</span>
+              <h3>Large Language Models</h3>
+            </div>
+            <p class="card-description">
+              Investigating architectural optimizations, training strategies, and efficiency improvements for large-scale language models. Focus on balancing model performance with computational efficiency.
+            </p>
+            <div class="card-tags">
+              <span>Architecture</span>
+              <span>Training</span>
+              <span>Optimization</span>
+            </div>
+          </article>
+          <article class="research-card">
+            <div class="card-header">
+              <span class="card-number">02</span>
+              <h3>AI Agents</h3>
+            </div>
+            <p class="card-description">
+              Researching decision-making mechanisms, multi-agent collaboration, and autonomous learning capabilities. Developing practical applications for intelligent agent systems.
+            </p>
+            <div class="card-tags">
+              <span>Decision Making</span>
+              <span>Multi-Agent</span>
+              <span>Autonomous Learning</span>
+            </div>
+          </article>
+          <article class="research-card">
+            <div class="card-header">
+              <span class="card-number">03</span>
+              <h3>Vision-Language Models</h3>
+            </div>
+            <p class="card-description">
+              Exploring multimodal understanding and generation, focusing on deep fusion of visual and linguistic information to enhance cross-modal capabilities.
+            </p>
+            <div class="card-tags">
+              <span>Multimodal</span>
+              <span>Vision</span>
+              <span>Language</span>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
-    <footer>
-      <p>&copy; 2024 Mingda Liu. Built with passion and code.</p>
-    </footer>
-  </div>
+    <!-- Projects Section -->
+    <section id="projects" class="content-section">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2 class="section-title">Projects</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="section-content">
+        <div class="projects-list">
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="project-year">2024</span>
+              <span class="project-category">Research</span>
+            </div>
+            <h3 class="project-title">LLM-based Agent Framework</h3>
+            <p class="project-description">
+              A framework for integrating large language models into agent systems, enabling more intelligent decision-making and planning capabilities.
+            </p>
+            <div class="project-tech">
+              <span>Python</span>
+              <span>PyTorch</span>
+              <span>Transformers</span>
+            </div>
+          </article>
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="project-year">2024</span>
+              <span class="project-category">Research</span>
+            </div>
+            <h3 class="project-title">Multimodal Learning System</h3>
+            <p class="project-description">
+              Research on cross-modal understanding and generation, exploring the fusion of visual and textual information in neural networks.
+            </p>
+            <div class="project-tech">
+              <span>Python</span>
+              <span>TensorFlow</span>
+              <span>Computer Vision</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
+    <!-- Blog Section -->
+    <section id="blog" class="content-section">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2 class="section-title">Blog & Insights</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="section-content">
+        <div class="blog-list">
+          <article class="blog-card">
+            <time class="blog-date">2024.01</time>
+            <h3 class="blog-title">
+              <a href="#">Integrating LLMs into Agent Systems</a>
+            </h3>
+            <p class="blog-excerpt">
+              Exploring how large language models can be effectively integrated into agent systems to achieve more intelligent decision-making and planning capabilities.
+            </p>
+            <div class="blog-tags">
+              <span>LLM</span>
+              <span>Agent</span>
+              <span>AI</span>
+            </div>
+          </article>
+          <article class="blog-card">
+            <time class="blog-date">2024.02</time>
+            <h3 class="blog-title">
+              <a href="#">Challenges in Multimodal Learning</a>
+            </h3>
+            <p class="blog-excerpt">
+              Analyzing the main challenges facing multimodal learning and potential future directions for research and development.
+            </p>
+            <div class="blog-tags">
+              <span>Multimodal</span>
+              <span>Vision-Language</span>
+              <span>Research</span>
+            </div>
+          </article>
+          <article class="blog-card">
+            <time class="blog-date">2024.03</time>
+            <h3 class="blog-title">
+              <a href="#">Thoughts on AI Research</a>
+            </h3>
+            <p class="blog-excerpt">
+              Sharing reflections and insights from my journey in AI research, including practical experiences and methodological considerations.
+            </p>
+            <div class="blog-tags">
+              <span>Research</span>
+              <span>AI</span>
+              <span>Thoughts</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience" class="content-section">
+      <div class="section-header">
+        <span class="section-number">05</span>
+        <h2 class="section-title">Experience</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="section-content">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <time class="timeline-date">2024 - Present</time>
+              <h3 class="timeline-title">Graduate Student</h3>
+              <p class="timeline-org">BUAA</p>
+              <p class="timeline-description">Researching LLM, AI Agents, and Vision-Language Models</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <time class="timeline-date">2023</time>
+              <h3 class="timeline-title">Research Intern</h3>
+              <p class="timeline-org">AI Lab</p>
+              <p class="timeline-description">Worked on large language model optimization and deployment</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <time class="timeline-date">2022</time>
+              <h3 class="timeline-title">Undergraduate Research</h3>
+              <p class="timeline-org">University</p>
+              <p class="timeline-description">Explored deep learning applications in computer vision</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content-section">
+      <div class="section-header">
+        <span class="section-number">06</span>
+        <h2 class="section-title">Contact</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="section-content">
+        <div class="contact-content">
+          <p class="contact-intro">Feel free to reach out for collaboration, research discussions, or just to connect.</p>
+          <div class="contact-links">
+            <a href="https://github.com/ailmd" class="contact-link" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a href="mailto:your.email@example.com" class="contact-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span>Email</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <p>&copy; 2024 Mingda Liu. All rights reserved.</p>
+      <p class="footer-tagline">Exploring the future of AI, one research at a time.</p>
+    </div>
+  </footer>
+
+  <!-- Particles Background -->
   <div class="particles" id="particles"></div>
+  
   <script src="script.js"></script>
-  <script src="chatbot.js"></script>
 </body>
 </html>
