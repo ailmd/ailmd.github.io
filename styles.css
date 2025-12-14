@@ -73,6 +73,12 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: default;
+}
+
+/* 确保所有可交互元素显示正确的鼠标样式 */
+a, button, input, textarea, select, [role="button"], [tabindex], .project-card, .research-card, .blog-card {
+  cursor: pointer;
 }
 
 /* ============================================
