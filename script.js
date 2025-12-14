@@ -5,7 +5,7 @@ function initPixelNameAnimation() {
   const nameElement = document.getElementById('pixelName');
   if (!nameElement) return;
 
-  const fullName = 'Mingda Liu';
+  const fullName = 'Hello, I am Liu Mingda !';
   const chars = fullName.split('');
   let currentIndex = 0;
   let isHiding = false;
@@ -99,9 +99,12 @@ function initSmoothScroll() {
         // 计算准确的滚动位置
         const nav = document.querySelector('.main-nav');
         const navHeight = nav ? nav.offsetHeight : 0;
-        const targetRect = target.getBoundingClientRect();
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-        const targetPosition = targetRect.top + currentScroll - navHeight - 20; // 额外20px间距
+        
+        // 使用 offsetTop 获取元素相对于文档的位置
+        let targetPosition = target.offsetTop;
+        
+        // 减去导航栏高度和额外间距
+        targetPosition = targetPosition - navHeight - 30; // 30px额外间距，确保内容不被遮挡
         
         // 平滑滚动到目标位置
         window.scrollTo({
@@ -216,7 +219,7 @@ function initParticles() {
   if (!particlesContainer) return;
 
   // 低密度：只创建30个粒子
-  const particleCount = 30;
+  const particleCount = 66;
 
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
