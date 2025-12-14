@@ -1,4 +1,12 @@
 // ============================================
+// 全局统一滚动偏移量（核心）
+// ============================================
+function getNavOffset() {
+  const nav = document.querySelector('.main-nav');
+  return (nav?.offsetHeight || 0) + 60; // 统一安全距离
+}
+
+// ============================================
 // 像素风名字逐字消失和出现动画
 // ============================================
 function initPixelNameAnimation() {
@@ -9,13 +17,12 @@ function initPixelNameAnimation() {
   const chars = fullName.split('');
   let currentIndex = 0;
   let isHiding = false;
-  let animationInterval = null;
   let waitTimeout = null;
   let isWaiting = false;
 
   function createNameElement() {
     nameElement.innerHTML = '';
-    chars.forEach((char) => {
+    chars.forEach(char => {
       const span = document.createElement('span');
       span.className = 'char hidden';
       span.textContent = char === ' ' ? '\u00A0' : char;
@@ -28,18 +35,16 @@ function initPixelNameAnimation() {
 
   function animateName() {
     if (isWaiting) return;
-    
+
     const charElements = nameElement.querySelectorAll('.char');
-    
+
     if (!isHiding) {
       if (currentIndex < chars.length) {
-        if (charElements[currentIndex]) {
-          charElements[currentIndex].classList.remove('hidden');
-        }
+        charElements[currentIndex]?.classList.remove('hidden');
         currentIndex++;
       } else {
         isWaiting = true;
-        if (waitTimeout) clearTimeout(waitTimeout);
+        waitTimeout && clearTimeout(waitTimeout);
         waitTimeout = setTimeout(() => {
           isHiding = true;
           currentIndex = chars.length - 1;
@@ -48,16 +53,12 @@ function initPixelNameAnimation() {
       }
     } else {
       if (currentIndex >= 0) {
-        if (charElements[currentIndex]) {
-          charElements[currentIndex].classList.add('hidden');
-        }
+        charElements[currentIndex]?.classList.add('hidden');
         currentIndex--;
       } else {
         isWaiting = true;
-        if (waitTimeout) clearTimeout(waitTimeout);
+        waitTimeout && clearTimeout(waitTimeout);
         waitTimeout = setTimeout(() => {
-          isHiding = false;
-          currentIndex = 0;
           createNameElement();
           isWaiting = false;
         }, 800);
@@ -66,102 +67,54 @@ function initPixelNameAnimation() {
   }
 
   createNameElement();
-  animationInterval = setInterval(animateName, 150);
+  setInterval(animateName, 150);
 }
 
 // ============================================
-// 平滑滚动导航
+// 平滑滚动导航（已统一 offset）
 // ============================================
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', e => {
       e.preventDefault();
-      const href = this.getAttribute('href');
-      
-      // 如果是hero链接，直接滚动到顶部
+      const href = anchor.getAttribute('href');
+
       if (href === '#hero') {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-        // 更新导航高亮
-        document.querySelectorAll('.nav-links a').forEach(link => {
-          link.classList.remove('active');
-        });
-        setTimeout(() => {
-          updateActiveNav();
-        }, 500);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(updateActiveNav, 500);
         return;
       }
-      
+
       const target = document.querySelector(href);
-      
-      if (target) {
-        // 立即更新活动导航项
-        const navLinks = document.querySelectorAll('.nav-links a');
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-        });
-        // 如果点击的是导航链接，则高亮它
-        if (this.closest('.nav-links')) {
-          this.classList.add('active');
-        } else {
-          // 如果点击的是其他链接，找到对应的导航链接并高亮
-          const correspondingNavLink = document.querySelector(`.nav-links a[href="${href}"]`);
-          if (correspondingNavLink) {
-            correspondingNavLink.classList.add('active');
-          }
-        }
-        
-        // 计算准确的滚动位置
-        const nav = document.querySelector('.main-nav');
-        const navHeight = nav ? nav.offsetHeight : 0;
-        
-        // 获取目标元素相对于文档的位置
-        let targetPosition = target.offsetTop;
-        
-        // 如果目标元素在main-content内，需要考虑main-content的offsetTop
-        const mainContent = document.querySelector('.main-content');
-        if (mainContent && target.closest('.main-content')) {
-          // 不需要额外调整，offsetTop已经是相对于文档的位置
-        }
-        
-        // 减去导航栏高度和额外间距
-        targetPosition = targetPosition - navHeight - 40;
-        
-        // 平滑滚动到目标位置
-        window.scrollTo({
-          top: Math.max(0, targetPosition),
-          behavior: 'smooth'
-        });
-        
-        // 滚动完成后再次确认高亮状态
-        setTimeout(() => {
-          updateActiveNav();
-        }, 800);
-      } else {
-        console.warn('Target element not found for:', href);
-      }
+      if (!target) return;
+
+      const offset = getNavOffset();
+      const targetPosition = target.offsetTop - offset;
+
+      window.scrollTo({
+        top: Math.max(0, targetPosition),
+        behavior: 'smooth'
+      });
+
+      setTimeout(updateActiveNav, 800);
     });
   });
 }
 
 // ============================================
-// 滚动动画
+// 滚动进入动画
 // ============================================
 function initScrollAnimation() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
       }
     });
-  }, observerOptions);
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  });
 
   document.querySelectorAll('.content-section').forEach(section => {
     observer.observe(section);
@@ -175,109 +128,64 @@ function initNavScroll() {
   const nav = document.getElementById('mainNav');
   if (!nav) return;
 
-  let lastScroll = 0;
-  
   window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > 100) {
+    if (window.scrollY > 100) {
       nav.classList.add('scrolled');
     } else {
       nav.classList.remove('scrolled');
     }
-    
-    // 更新活动导航项
     updateActiveNav();
-    
-    lastScroll = currentScroll;
   });
 }
 
 // ============================================
-// 更新活动导航项
+// 更新活动导航项（已统一 offset）
 // ============================================
 function updateActiveNav() {
   const sections = document.querySelectorAll('.content-section, .hero');
   const navLinks = document.querySelectorAll('.nav-links a');
-  
-  let current = '';
-  const scrollPosition = window.pageYOffset || window.scrollY;
-  const navHeight = document.querySelector('.main-nav')?.offsetHeight || 0;
-  const offset = navHeight + 150; // 偏移量，考虑导航栏高度和额外间距
-  
-  // 遍历所有section，找到当前应该高亮的section
-  sections.forEach((section, index) => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.offsetHeight;
-    const sectionBottom = sectionTop + sectionHeight;
-    const sectionId = section.getAttribute('id');
-    
-    // 判断当前滚动位置是否在这个section的范围内
-    // 考虑偏移量，当滚动位置进入section区域时高亮
-    if (scrollPosition + offset >= sectionTop && scrollPosition + offset < sectionBottom) {
-      current = sectionId;
-    }
-    
-    // 特殊处理：如果滚动位置在section顶部附近（在section开始之前但很接近）
-    if (scrollPosition + offset >= sectionTop - 100 && scrollPosition + offset < sectionTop) {
-      current = sectionId;
+  const scrollPos = window.scrollY;
+  const offset = getNavOffset();
+
+  let currentId = '';
+
+  sections.forEach(section => {
+    const top = section.offsetTop;
+    const bottom = top + section.offsetHeight;
+    if (scrollPos + offset >= top && scrollPos + offset < bottom) {
+      currentId = section.id;
     }
   });
-  
-  // 如果还在页面顶部，高亮hero
-  if (scrollPosition < 100) {
-    current = 'hero';
-  }
-  
-  // 如果滚动到底部，高亮最后一个section
-  if (!current && sections.length > 0) {
-    const lastSection = sections[sections.length - 1];
-    if (scrollPosition + window.innerHeight >= document.documentElement.scrollHeight - 50) {
-      current = lastSection.getAttribute('id');
-    }
-  }
 
-  // 更新导航链接的高亮状态
+  if (scrollPos < 100) currentId = 'hero';
+
   navLinks.forEach(link => {
-    link.classList.remove('active');
-    const href = link.getAttribute('href');
-    if (href === `#${current}`) {
-      link.classList.add('active');
-    }
+    link.classList.toggle(
+      'active',
+      link.getAttribute('href') === `#${currentId}`
+    );
   });
 }
 
 // ============================================
-// 粒子效果 - 荧光绿色低密度慢速
+// 粒子效果（荧光绿色低密度慢速）
 // ============================================
 function initParticles() {
-  const particlesContainer = document.getElementById('particles');
-  if (!particlesContainer) return;
+  const container = document.getElementById('particles');
+  if (!container) return;
 
-  // 低密度：只创建30个粒子
-  const particleCount = 66;
-
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    
-    // 随机位置
-    particle.style.left = Math.random() * 100 + '%';
-    
-    // 慢速：25-35秒的动画时长
-    const duration = 25 + Math.random() * 10;
-    particle.style.animationDuration = duration + 's';
-    particle.style.animationDelay = Math.random() * 5 + 's';
-    
-    // 随机大小（保持小尺寸）
-    const size = 1.5 + Math.random() * 1;
-    particle.style.width = size + 'px';
-    particle.style.height = size + 'px';
-    
-    // 随机透明度（保持较低）
-    particle.style.opacity = 0.2 + Math.random() * 0.3;
-    
-    particlesContainer.appendChild(particle);
+  const count = 66;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = 25 + Math.random() * 10 + 's';
+    p.style.animationDelay = Math.random() * 5 + 's';
+    const size = 1.5 + Math.random();
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    p.style.opacity = 0.2 + Math.random() * 0.3;
+    container.appendChild(p);
   }
 }
 
@@ -288,60 +196,37 @@ function initCustomCursor() {
   const cursor = document.createElement('div');
   cursor.className = 'custom-cursor';
   document.body.appendChild(cursor);
-  
-  let mouseX = 0;
-  let mouseY = 0;
-  let cursorX = 0;
-  let cursorY = 0;
-  
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+
+  let x = 0, y = 0, cx = 0, cy = 0;
+
+  document.addEventListener('mousemove', e => {
+    x = e.clientX;
+    y = e.clientY;
     cursor.style.display = 'block';
   });
-  
-  // 平滑跟随动画
-  function animateCursor() {
-    cursorX += (mouseX - cursorX) * 0.1;
-    cursorY += (mouseY - cursorY) * 0.1;
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-  
-  // 悬停效果
-  const hoverElements = document.querySelectorAll('a, button, .hero-link, .contact-link, .nav-links a, .research-card, .project-card, .blog-card');
-  hoverElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.classList.add('hover');
+
+  (function animate() {
+    cx += (x - cx) * 0.1;
+    cy += (y - cy) * 0.1;
+    cursor.style.left = cx + 'px';
+    cursor.style.top = cy + 'px';
+    requestAnimationFrame(animate);
+  })();
+
+  document.querySelectorAll('a, button, .nav-links a, .project-card')
+    .forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
     });
-    el.addEventListener('mouseleave', () => {
-      cursor.classList.remove('hover');
-    });
-  });
-  
-  // 点击效果
-  document.addEventListener('mousedown', () => {
-    cursor.classList.add('click');
-  });
-  document.addEventListener('mouseup', () => {
-    cursor.classList.remove('click');
-  });
-  
-  // 鼠标离开页面时隐藏
-  document.addEventListener('mouseleave', () => {
-    cursor.style.display = 'none';
-  });
-  document.addEventListener('mouseenter', () => {
-    cursor.style.display = 'block';
-  });
+
+  document.addEventListener('mousedown', () => cursor.classList.add('click'));
+  document.addEventListener('mouseup', () => cursor.classList.remove('click'));
 }
 
 // ============================================
-// 页面加载完成后初始化
+// 页面初始化
 // ============================================
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
   initPixelNameAnimation();
   initSmoothScroll();
   initScrollAnimation();
