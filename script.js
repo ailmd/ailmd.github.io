@@ -76,26 +76,43 @@ function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
+      const href = this.getAttribute('href');
+      const target = document.querySelector(href);
+      
       if (target) {
         // 立即更新活动导航项
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
           link.classList.remove('active');
         });
-        this.classList.add('active');
+        // 如果点击的是导航链接，则高亮它
+        if (this.closest('.nav-links')) {
+          this.classList.add('active');
+        } else {
+          // 如果点击的是其他链接（如hero链接），找到对应的导航链接并高亮
+          const correspondingNavLink = document.querySelector(`.nav-links a[href="${href}"]`);
+          if (correspondingNavLink) {
+            correspondingNavLink.classList.add('active');
+          }
+        }
         
-        const navHeight = document.querySelector('.main-nav').offsetHeight;
-        const targetPosition = target.offsetTop - navHeight;
+        // 计算准确的滚动位置
+        const nav = document.querySelector('.main-nav');
+        const navHeight = nav ? nav.offsetHeight : 0;
+        const targetRect = target.getBoundingClientRect();
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        const targetPosition = targetRect.top + currentScroll - navHeight - 20; // 额外20px间距
         
+        // 平滑滚动到目标位置
         window.scrollTo({
-          top: targetPosition,
+          top: Math.max(0, targetPosition), // 确保不为负数
           behavior: 'smooth'
         });
         
         // 滚动完成后再次确认高亮状态
         setTimeout(() => {
           updateActiveNav();
-        }, 500);
+        }, 800);
       }
     });
   });
