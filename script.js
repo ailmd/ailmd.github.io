@@ -89,13 +89,16 @@ function initSmoothScroll() {
       if (!target) return;
 
       const offset = getNavOffset();
-      const targetPosition = target.offsetTop - offset;
+      // 使用 getBoundingClientRect() 获取相对于视口的位置，然后加上当前滚动位置
+      const rect = target.getBoundingClientRect();
+      const targetPosition = window.scrollY + rect.top - offset;
 
       window.scrollTo({
         top: Math.max(0, targetPosition),
         behavior: 'smooth'
       });
 
+      // 等待滚动完成后再更新导航状态
       setTimeout(updateActiveNav, 800);
     });
   });
@@ -150,13 +153,18 @@ function updateActiveNav() {
   let currentId = '';
 
   sections.forEach(section => {
-    const top = section.offsetTop;
-    const bottom = top + section.offsetHeight;
+    // 使用 getBoundingClientRect() 获取相对于视口的位置，更准确
+    const rect = section.getBoundingClientRect();
+    const top = scrollPos + rect.top;
+    const bottom = top + rect.height;
+    
+    // 判断当前滚动位置（加上偏移量）是否在section范围内
     if (scrollPos + offset >= top && scrollPos + offset < bottom) {
       currentId = section.id;
     }
   });
 
+  // 如果滚动位置接近顶部，设置为hero
   if (scrollPos < 100) currentId = 'hero';
 
   navLinks.forEach(link => {
@@ -190,40 +198,6 @@ function initParticles() {
 }
 
 // ============================================
-// 自定义鼠标样式
-// ============================================
-function initCustomCursor() {
-  const cursor = document.createElement('div');
-  cursor.className = 'custom-cursor';
-  document.body.appendChild(cursor);
-
-  let x = 0, y = 0, cx = 0, cy = 0;
-
-  document.addEventListener('mousemove', e => {
-    x = e.clientX;
-    y = e.clientY;
-    cursor.style.display = 'block';
-  });
-
-  (function animate() {
-    cx += (x - cx) * 0.1;
-    cy += (y - cy) * 0.1;
-    cursor.style.left = cx + 'px';
-    cursor.style.top = cy + 'px';
-    requestAnimationFrame(animate);
-  })();
-
-  document.querySelectorAll('a, button, .nav-links a, .project-card')
-    .forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
-
-  document.addEventListener('mousedown', () => cursor.classList.add('click'));
-  document.addEventListener('mouseup', () => cursor.classList.remove('click'));
-}
-
-// ============================================
 // 页面初始化
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -232,5 +206,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimation();
   initNavScroll();
   initParticles();
-  initCustomCursor();
 });
