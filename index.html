@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Mingda Liu - Graduate student at BUAA, researching LLM, Agent, and Vision-Language Models">
-  <title>Mingda Liu | AI Research</title>
+  <title>Mingda Liu | Personal Blog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="styles.css">
@@ -12,7 +12,10 @@
 <body>
   <div class="container">
     <header>
-      <div class="avatar">ML</div>
+      <div class="avatar-wrapper">
+        <div class="avatar">ML</div>
+        <div class="avatar-glow"></div>
+      </div>
       <div class="pixel-name" id="pixelName"></div>
       <p class="subtitle">Graduate Student at BUAA</p>
       <p class="bio">
@@ -22,41 +25,83 @@
     </header>
 
     <nav>
+      <a href="#about">关于</a>
       <a href="#research">研究</a>
-      <a href="#interests">兴趣</a>
+      <a href="#blog">博客</a>
       <a href="internship.html">实习</a>
       <a href="#contact">联系</a>
     </nav>
 
-    <section id="research">
-      <h2>研究领域</h2>
+    <section id="about" class="fade-in">
+      <h2><span class="section-icon">></span> 关于我</h2>
+      <div class="about-content">
+        <p>我是一名专注于人工智能研究的硕士研究生，对前沿技术充满热情。我的研究兴趣涵盖大语言模型、智能体系统和多模态学习等领域。</p>
+        <div class="skills">
+          <span class="skill-tag">LLM</span>
+          <span class="skill-tag">Agent</span>
+          <span class="skill-tag">Vision-Language</span>
+          <span class="skill-tag">Deep Learning</span>
+          <span class="skill-tag">Python</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="research" class="fade-in">
+      <h2><span class="section-icon">></span> 研究领域</h2>
       <div class="interests">
         <div class="interest-card">
+          <div class="card-icon">🧠</div>
           <h3>大语言模型</h3>
           <p>探索大语言模型的架构优化、训练方法和应用场景，关注模型效率与性能的平衡。</p>
         </div>
         <div class="interest-card">
+          <div class="card-icon">🤖</div>
           <h3>智能体</h3>
           <p>研究 AI 智能体的决策机制、多智能体协作和自主学习能力，推动智能体系统的实际应用。</p>
         </div>
         <div class="interest-card">
+          <div class="card-icon">👁️</div>
           <h3>视觉-语言模型</h3>
           <p>专注于多模态理解与生成，研究视觉与语言信息的深度融合，提升模型的跨模态能力。</p>
         </div>
       </div>
     </section>
 
-    <section id="interests">
-      <h2>研究兴趣</h2>
-      <p style="color: var(--text-light); line-height: 1.8; margin-top: 16px;">
-        <strong>LLM (Large Language Models)</strong> - 大语言模型的预训练、微调和推理优化<br>
-        <strong>Agent</strong> - 智能体的规划、工具使用和长期记忆机制<br>
-        <strong>Vision-Language Models</strong> - 视觉-语言多模态模型的架构设计与应用
-      </p>
+    <section id="blog" class="fade-in">
+      <h2><span class="section-icon">></span> 最新文章</h2>
+      <div class="blog-list">
+        <article class="blog-card">
+          <div class="blog-date">2024.01</div>
+          <h3><a href="#">大语言模型在智能体系统中的应用</a></h3>
+          <p>探讨如何将大语言模型集成到智能体系统中，实现更智能的决策和规划能力...</p>
+          <div class="blog-tags">
+            <span>LLM</span>
+            <span>Agent</span>
+          </div>
+        </article>
+        <article class="blog-card">
+          <div class="blog-date">2024.02</div>
+          <h3><a href="#">多模态学习的挑战与机遇</a></h3>
+          <p>分析当前多模态学习领域面临的主要挑战，以及未来可能的发展方向...</p>
+          <div class="blog-tags">
+            <span>Vision-Language</span>
+            <span>Multimodal</span>
+          </div>
+        </article>
+        <article class="blog-card">
+          <div class="blog-date">2024.03</div>
+          <h3><a href="#">AI 研究中的思考与实践</a></h3>
+          <p>分享在 AI 研究过程中的一些思考、经验和实践心得...</p>
+          <div class="blog-tags">
+            <span>Research</span>
+            <span>AI</span>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <section id="contact">
-      <h2>联系方式</h2>
+    <section id="contact" class="fade-in">
+      <h2><span class="section-icon">></span> 联系方式</h2>
       <div class="links">
         <a href="https://github.com/ailmd" class="link-item" target="_blank" rel="noopener noreferrer">
           <svg fill="currentColor" viewBox="0 0 24 24">
@@ -74,10 +119,11 @@
     </section>
 
     <footer>
-      <p>&copy; 2024 Mingda Liu. Built with simplicity and elegance.</p>
+      <p>&copy; 2024 Mingda Liu. Built with passion and code.</p>
     </footer>
   </div>
 
+  <div class="particles" id="particles"></div>
   <script src="script.js"></script>
 </body>
 </html>
