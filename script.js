@@ -78,6 +78,12 @@ function initSmoothScroll() {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
+        // 立即更新活动导航项
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.classList.remove('active');
+        });
+        this.classList.add('active');
+        
         const navHeight = document.querySelector('.main-nav').offsetHeight;
         const targetPosition = target.offsetTop - navHeight;
         
@@ -85,6 +91,11 @@ function initSmoothScroll() {
           top: targetPosition,
           behavior: 'smooth'
         });
+        
+        // 滚动完成后再次确认高亮状态
+        setTimeout(() => {
+          updateActiveNav();
+        }, 500);
       }
     });
   });
@@ -145,20 +156,36 @@ function updateActiveNav() {
   const navLinks = document.querySelectorAll('.nav-links a');
   
   let current = '';
-  const scrollPosition = window.pageYOffset + 150;
+  const scrollPosition = window.pageYOffset;
+  const navHeight = document.querySelector('.main-nav')?.offsetHeight || 0;
+  const offset = navHeight + 100; // 增加偏移量，确保在区域中间时高亮
   
-  sections.forEach(section => {
+  // 从后往前查找，找到第一个满足条件的section
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const section = sections[i];
     const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;
     
-    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+    if (scrollPosition + offset >= sectionTop) {
       current = section.getAttribute('id');
+      break;
     }
-  });
+  }
+  
+  // 如果没有找到，默认高亮第一个section
+  if (!current && sections.length > 0) {
+    const firstSection = sections[0];
+    if (scrollPosition < firstSection.offsetTop) {
+      current = 'hero';
+    } else {
+      current = firstSection.getAttribute('id');
+    }
+  }
 
   navLinks.forEach(link => {
     link.classList.remove('active');
-    if (link.getAttribute('href') === `#${current}`) {
+    const href = link.getAttribute('href');
+    if (href === `#${current}` || (current === 'hero' && href === '#hero')) {
       link.classList.add('active');
     }
   });
@@ -199,6 +226,63 @@ function initParticles() {
 }
 
 // ============================================
+// 自定义鼠标样式
+// ============================================
+function initCustomCursor() {
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+  
+  let mouseX = 0;
+  let mouseY = 0;
+  let cursorX = 0;
+  let cursorY = 0;
+  
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.display = 'block';
+  });
+  
+  // 平滑跟随动画
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.1;
+    cursorY += (mouseY - cursorY) * 0.1;
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+  
+  // 悬停效果
+  const hoverElements = document.querySelectorAll('a, button, .hero-link, .contact-link, .nav-links a, .research-card, .project-card, .blog-card');
+  hoverElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('hover');
+    });
+  });
+  
+  // 点击效果
+  document.addEventListener('mousedown', () => {
+    cursor.classList.add('click');
+  });
+  document.addEventListener('mouseup', () => {
+    cursor.classList.remove('click');
+  });
+  
+  // 鼠标离开页面时隐藏
+  document.addEventListener('mouseleave', () => {
+    cursor.style.display = 'none';
+  });
+  document.addEventListener('mouseenter', () => {
+    cursor.style.display = 'block';
+  });
+}
+
+// ============================================
 // 页面加载完成后初始化
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
@@ -207,4 +291,5 @@ document.addEventListener('DOMContentLoaded', function() {
   initScrollAnimation();
   initNavScroll();
   initParticles();
+  initCustomCursor();
 });

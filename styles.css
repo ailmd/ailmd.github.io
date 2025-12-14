@@ -10,6 +10,63 @@
   box-sizing: border-box;
 }
 
+/* ============================================
+   自定义鼠标样式 - 科技风荧光绿
+   ============================================ */
+* {
+  cursor: none;
+}
+
+body {
+  cursor: none;
+}
+
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--green-glow);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 0 10px var(--green-glow);
+  display: none;
+}
+
+.custom-cursor::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 4px;
+  background: var(--green-glow);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--green-glow);
+}
+
+.custom-cursor.hover {
+  width: 40px;
+  height: 40px;
+  border-color: var(--green-glow);
+  box-shadow: 0 0 20px var(--green-glow);
+}
+
+.custom-cursor.click {
+  width: 15px;
+  height: 15px;
+  border-color: var(--green-glow);
+  box-shadow: 0 0 15px var(--green-glow);
+}
+
+/* 可交互元素恢复指针 */
+a, button, input, textarea, select, [role="button"], [tabindex] {
+  cursor: none;
+}
+
 :root {
   /* 主色调 - 黑色 + 深绿 + 荧光绿 */
   --bg-primary: #000000;
