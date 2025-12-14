@@ -25,41 +25,80 @@ body {
   position: fixed;
   width: 20px;
   height: 20px;
-  border: 2px solid var(--green-glow);
-  border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
-  box-shadow: 0 0 10px var(--green-glow);
+  transform: translate(-2px, -2px);
+  transition: transform 0.1s ease;
   display: none;
 }
 
+/* 箭头主体 - 指向右上方 */
 .custom-cursor::before {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 4px;
-  height: 4px;
-  background: var(--green-glow);
-  border-radius: 50%;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 2px solid var(--green-glow);
+  border-top: 16px solid var(--green-glow);
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  filter: drop-shadow(0 0 4px var(--green-glow)) drop-shadow(0 0 8px var(--green-glow));
   box-shadow: 0 0 6px var(--green-glow);
 }
 
-.custom-cursor.hover {
-  width: 40px;
-  height: 40px;
-  border-color: var(--green-glow);
-  box-shadow: 0 0 20px var(--green-glow);
+/* 箭头填充 - 让箭头更实心 */
+.custom-cursor::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 0;
+  height: 0;
+  border-left: 1px solid var(--green-glow);
+  border-top: 12px solid var(--green-glow);
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  filter: drop-shadow(0 0 2px var(--green-glow));
 }
 
+/* 悬停时放大 */
+.custom-cursor.hover {
+  transform: translate(-3px, -3px) scale(1.2);
+}
+
+.custom-cursor.hover::before {
+  border-left-width: 2.5px;
+  border-top-width: 18px;
+  border-right-width: 9px;
+  border-bottom-width: 9px;
+}
+
+.custom-cursor.hover::after {
+  border-left-width: 1.5px;
+  border-top-width: 14px;
+  border-right-width: 7px;
+  border-bottom-width: 7px;
+}
+
+/* 点击时缩小 */
 .custom-cursor.click {
-  width: 15px;
-  height: 15px;
-  border-color: var(--green-glow);
-  box-shadow: 0 0 15px var(--green-glow);
+  transform: translate(-1.5px, -1.5px) scale(0.85);
+}
+
+.custom-cursor.click::before {
+  border-left-width: 1.5px;
+  border-top-width: 14px;
+  border-right-width: 7px;
+  border-bottom-width: 7px;
+}
+
+.custom-cursor.click::after {
+  border-left-width: 1px;
+  border-top-width: 10px;
+  border-right-width: 5px;
+  border-bottom-width: 5px;
 }
 
 /* 可交互元素恢复指针 */
