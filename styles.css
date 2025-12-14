@@ -607,6 +607,288 @@ footer {
 }
 
 /* ============================================
+   生活页面样式
+   ============================================ */
+.life-content {
+  line-height: 2;
+  color: var(--text-light);
+}
+
+.life-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.life-item {
+  background: var(--bg-card);
+  padding: 32px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: all 0.4s ease;
+  cursor: default;
+}
+
+.life-item:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--glow-color);
+}
+
+.life-item h3 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.life-item p {
+  font-size: 15px;
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+/* ============================================
+   聊天机器人样式
+   ============================================ */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 380px;
+  max-height: 600px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.chatbot-header {
+  background: var(--bg-light);
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chatbot-header span {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.chatbot-toggle {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.chatbot-toggle:hover {
+  background: var(--glow-color);
+  color: var(--bg-dark);
+  border-color: var(--glow-color);
+}
+
+.chatbot-body {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  background: var(--bg-card);
+}
+
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chatbot-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatbot-messages::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--glow-color);
+}
+
+.message {
+  display: flex;
+  margin-bottom: 12px;
+  animation: messageSlide 0.3s ease;
+}
+
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.user-message {
+  justify-content: flex-end;
+}
+
+.bot-message {
+  justify-content: flex-start;
+}
+
+.message-content {
+  max-width: 75%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  word-wrap: break-word;
+  line-height: 1.5;
+}
+
+.user-message .message-content {
+  background: var(--glow-color);
+  color: var(--bg-dark);
+  border-bottom-right-radius: 4px;
+}
+
+.bot-message .message-content {
+  background: var(--bg-light);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-bottom-left-radius: 4px;
+}
+
+.error .message-content {
+  background: rgba(255, 107, 157, 0.2);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.chatbot-input-area {
+  border-top: 1px solid var(--border-color);
+  padding: 16px;
+  background: var(--bg-light);
+}
+
+.api-key-section {
+  margin-bottom: 12px;
+  padding: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.api-key-section input {
+  flex: 1;
+  min-width: 200px;
+  padding: 8px 12px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-color);
+  font-size: 13px;
+}
+
+.api-key-section button {
+  padding: 8px 16px;
+  background: var(--glow-color);
+  border: none;
+  border-radius: 6px;
+  color: var(--bg-dark);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.api-key-section button:hover {
+  background: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.chatbot-input-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.chatbot-input-wrapper input {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.chatbot-input-wrapper input:focus {
+  outline: none;
+  border-color: var(--glow-color);
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+}
+
+.chatbot-input-wrapper input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chatbot-input-wrapper button {
+  padding: 12px 24px;
+  background: var(--glow-color);
+  border: none;
+  border-radius: 8px;
+  color: var(--bg-dark);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.chatbot-input-wrapper button:hover:not(:disabled) {
+  background: var(--primary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+}
+
+.chatbot-input-wrapper button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ============================================
    响应式设计
    ============================================ */
 @media (max-width: 768px) {
@@ -645,5 +927,21 @@ footer {
 
   h2 {
     font-size: 24px;
+  }
+
+  .chatbot-container {
+    width: calc(100% - 40px);
+    right: 20px;
+    left: 20px;
+    bottom: 20px;
+    max-height: 70vh;
+  }
+
+  .chatbot-body {
+    height: 400px;
+  }
+
+  .life-gallery {
+    grid-template-columns: 1fr;
   }
 }
