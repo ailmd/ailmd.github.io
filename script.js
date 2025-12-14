@@ -13,7 +13,7 @@ function initPixelNameAnimation() {
   const nameElement = document.getElementById('pixelName');
   if (!nameElement) return;
 
-  const fullName = 'Hello, I am Liu Mingda !';
+  const fullName = 'Welcome to my blog !';
   const chars = fullName.split('');
   let currentIndex = 0;
   let isHiding = false;
@@ -182,7 +182,7 @@ function initParticles() {
   const container = document.getElementById('particles');
   if (!container) return;
 
-  const count = 66;
+  const count = 88;
   for (let i = 0; i < count; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
