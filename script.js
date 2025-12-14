@@ -215,8 +215,8 @@ function initParticles() {
   const particlesContainer = document.getElementById('particles');
   if (!particlesContainer) return;
 
-  // 低密度：只创建15-20个粒子
-  const particleCount = 18;
+  // 低密度：只创建30个粒子
+  const particleCount = 30;
 
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
