@@ -77,6 +77,23 @@ function initSmoothScroll() {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const href = this.getAttribute('href');
+      
+      // 如果是hero链接，直接滚动到顶部
+      if (href === '#hero') {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        // 更新导航高亮
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.classList.remove('active');
+        });
+        setTimeout(() => {
+          updateActiveNav();
+        }, 500);
+        return;
+      }
+      
       const target = document.querySelector(href);
       
       if (target) {
@@ -89,7 +106,7 @@ function initSmoothScroll() {
         if (this.closest('.nav-links')) {
           this.classList.add('active');
         } else {
-          // 如果点击的是其他链接（如hero链接），找到对应的导航链接并高亮
+          // 如果点击的是其他链接，找到对应的导航链接并高亮
           const correspondingNavLink = document.querySelector(`.nav-links a[href="${href}"]`);
           if (correspondingNavLink) {
             correspondingNavLink.classList.add('active');
@@ -100,15 +117,21 @@ function initSmoothScroll() {
         const nav = document.querySelector('.main-nav');
         const navHeight = nav ? nav.offsetHeight : 0;
         
-        // 使用 offsetTop 获取元素相对于文档的位置
+        // 获取目标元素相对于文档的位置
         let targetPosition = target.offsetTop;
         
+        // 如果目标元素在main-content内，需要考虑main-content的offsetTop
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent && target.closest('.main-content')) {
+          // 不需要额外调整，offsetTop已经是相对于文档的位置
+        }
+        
         // 减去导航栏高度和额外间距
-        targetPosition = targetPosition - navHeight - 30; // 30px额外间距，确保内容不被遮挡
+        targetPosition = targetPosition - navHeight - 40;
         
         // 平滑滚动到目标位置
         window.scrollTo({
-          top: Math.max(0, targetPosition), // 确保不为负数
+          top: Math.max(0, targetPosition),
           behavior: 'smooth'
         });
         
@@ -116,6 +139,8 @@ function initSmoothScroll() {
         setTimeout(() => {
           updateActiveNav();
         }, 800);
+      } else {
+        console.warn('Target element not found for:', href);
       }
     });
   });
@@ -176,36 +201,47 @@ function updateActiveNav() {
   const navLinks = document.querySelectorAll('.nav-links a');
   
   let current = '';
-  const scrollPosition = window.pageYOffset;
+  const scrollPosition = window.pageYOffset || window.scrollY;
   const navHeight = document.querySelector('.main-nav')?.offsetHeight || 0;
-  const offset = navHeight + 100; // 增加偏移量，确保在区域中间时高亮
+  const offset = navHeight + 150; // 偏移量，考虑导航栏高度和额外间距
   
-  // 从后往前查找，找到第一个满足条件的section
-  for (let i = sections.length - 1; i >= 0; i--) {
-    const section = sections[i];
+  // 遍历所有section，找到当前应该高亮的section
+  sections.forEach((section, index) => {
     const sectionTop = section.offsetTop;
     const sectionHeight = section.offsetHeight;
+    const sectionBottom = sectionTop + sectionHeight;
+    const sectionId = section.getAttribute('id');
     
-    if (scrollPosition + offset >= sectionTop) {
-      current = section.getAttribute('id');
-      break;
+    // 判断当前滚动位置是否在这个section的范围内
+    // 考虑偏移量，当滚动位置进入section区域时高亮
+    if (scrollPosition + offset >= sectionTop && scrollPosition + offset < sectionBottom) {
+      current = sectionId;
     }
+    
+    // 特殊处理：如果滚动位置在section顶部附近（在section开始之前但很接近）
+    if (scrollPosition + offset >= sectionTop - 100 && scrollPosition + offset < sectionTop) {
+      current = sectionId;
+    }
+  });
+  
+  // 如果还在页面顶部，高亮hero
+  if (scrollPosition < 100) {
+    current = 'hero';
   }
   
-  // 如果没有找到，默认高亮第一个section
+  // 如果滚动到底部，高亮最后一个section
   if (!current && sections.length > 0) {
-    const firstSection = sections[0];
-    if (scrollPosition < firstSection.offsetTop) {
-      current = 'hero';
-    } else {
-      current = firstSection.getAttribute('id');
+    const lastSection = sections[sections.length - 1];
+    if (scrollPosition + window.innerHeight >= document.documentElement.scrollHeight - 50) {
+      current = lastSection.getAttribute('id');
     }
   }
 
+  // 更新导航链接的高亮状态
   navLinks.forEach(link => {
     link.classList.remove('active');
     const href = link.getAttribute('href');
-    if (href === `#${current}` || (current === 'hero' && href === '#hero')) {
+    if (href === `#${current}`) {
       link.classList.add('active');
     }
   });
