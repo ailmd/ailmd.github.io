@@ -223,49 +223,6 @@ a, button, input, textarea, select, [role="button"], [tabindex], .project-card, 
   font-weight: 300;
 }
 
-.hero-links {
-  display: flex;
-  gap: var(--spacing-md);
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: var(--spacing-lg);
-}
-
-.hero-link {
-  padding: 12px 24px;
-  border: 1px solid var(--border-primary);
-  color: var(--text-primary);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: var(--font-mono);
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--green-glow);
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.hero-link:hover {
-  color: var(--bg-primary);
-  border-color: var(--green-glow);
-}
-
-.hero-link:hover::before {
-  left: 0;
-}
-
 .scroll-indicator {
   position: absolute;
   bottom: var(--spacing-lg);
@@ -915,11 +872,6 @@ a, button, input, textarea, select, [role="button"], [tabindex], .project-card, 
 
   .hero-tagline {
     font-size: 15px;
-  }
-
-  .hero-links {
-    flex-direction: column;
-    gap: var(--spacing-sm);
   }
 
   .nav-links {

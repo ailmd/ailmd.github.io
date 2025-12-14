@@ -22,7 +22,6 @@
       <a href="index.html#research">研究</a>
       <a href="index.html#blog">博客</a>
       <a href="internship.html">实习</a>
-      <a href="life.html">生活</a>
       <a href="index.html#contact">联系</a>
     </nav>
 
@@ -45,19 +44,17 @@
     </footer>
   </div>
 
+  <div class="particles" id="particles"></div>
   <script src="script.js"></script>
   <script>
     // 根据URL参数加载不同的实习内容
     const urlParams = new URLSearchParams(window.location.search);
     const internshipId = urlParams.get('id');
     
-    // 这里可以根据id加载不同的内容
-    // 目前先显示占位内容
     if (internshipId) {
       const titleElement = document.getElementById('internshipTitle');
       const contentElement = document.getElementById('internshipContent');
       
-      // 可以根据id设置不同的标题和内容
       const internships = {
         '1': {
           title: '实习一详情',
@@ -80,8 +77,6 @@
       }
     }
   </script>
-  <div class="particles" id="particles"></div>
-  <script src="script.js"></script>
 </body>
 </html>
 
