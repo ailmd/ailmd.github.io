@@ -279,6 +279,67 @@ function initResearchScroll() {
 }
 
 // ============================================
+// Experience 模块弹窗
+// ============================================
+function initExperienceModal() {
+  const modal = document.getElementById('experienceModal');
+  if (!modal) return;
+
+  const titleEl = document.getElementById('experienceModalTitle');
+  const metaEl = document.getElementById('experienceModalMeta');
+  const bodyEl = document.getElementById('experienceModalBody');
+
+  function openForItem(item) {
+    const company = item.dataset.company || '';
+    const period = item.dataset.period || '';
+    const org = item.dataset.org || '';
+    const role = item.dataset.role || '';
+
+    titleEl.textContent = `${company} · ${role}`;
+    metaEl.textContent = `${period} · ${org}`;
+
+    const detailTemplate = item.querySelector('.timeline-detail');
+    if (detailTemplate) {
+      bodyEl.innerHTML = detailTemplate.innerHTML;
+    } else {
+      bodyEl.innerHTML = '';
+    }
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+
+  // 点击关闭区域或按钮关闭
+  modal.querySelectorAll('[data-experience-close]').forEach(el => {
+    el.addEventListener('click', closeModal);
+  });
+
+  // ESC 键关闭
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeModal();
+    }
+  });
+
+  // 为每个 timeline-item 绑定点击
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    item.setAttribute('tabindex', '0');
+    item.addEventListener('click', () => openForItem(item));
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openForItem(item);
+      }
+    });
+  });
+}
+
+// ============================================
 // 页面初始化
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -288,4 +349,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavScroll();
   initParticles();
   initResearchScroll();
+  initExperienceModal();
 });

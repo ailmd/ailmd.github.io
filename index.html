@@ -91,7 +91,13 @@
       </div>
       <div class="section-content">
         <div class="timeline">
-          <div class="timeline-item">
+          <div
+            class="timeline-item"
+            data-company="Meituan"
+            data-period="2025.11 - Now"
+            data-org="Core Local Commerce | Meituan App"
+            data-role="AI Agent Product Manager"
+          >
             <div class="timeline-marker"></div>
             <div class="timeline-content">
               <time class="timeline-date">2025.11 - Now</time>
@@ -99,8 +105,37 @@
               <p class="timeline-org">Core Local Commerce | Meituan App</p>
               <p class="timeline-description">AI Agent Product Manager</p>
             </div>
+            <div class="timeline-detail">
+              <div class="experience-letter">
+                <div class="experience-letter-image">
+                  <!-- 在这里放图片，例如：<img src="images/meituan.jpg" alt="Meituan"> -->
+                </div>
+                <p class="experience-letter-greeting">To the visitor of this blog,</p>
+                <p>
+                  During my time at <strong>Meituan</strong>, I worked as an
+                  <strong>AI Agent Product Manager</strong> in the
+                  <strong>Core Local Commerce</strong> team. My main focus was designing
+                  and iterating agent-style product experiences that connect users,
+                  merchants, and logistics in real local-life scenarios.
+                </p>
+                <p>
+                  I collaborated closely with algorithm engineers, frontend/backend
+                  developers, and operations to turn ambiguous ideas into concrete
+                  product specs, evaluation metrics, and launch plans. A big part of my
+                  work was balancing model capability, business value, and user trust
+                  when deploying large models in production.
+                </p>
+                <p class="experience-letter-sign">— Mingda</p>
+              </div>
+            </div>
           </div>
-          <div class="timeline-item">
+          <div
+            class="timeline-item"
+            data-company="China Academy of Information and Communications Technology (CAICT)"
+            data-period="2025.07 - 2025.10"
+            data-org="Institute of Artificial Intelligence | Platform and Engineering Department"
+            data-role="Code LLM Evaluation Researcher"
+          >
             <div class="timeline-marker"></div>
             <div class="timeline-content">
               <time class="timeline-date">2025.07-2025.10</time>
@@ -108,23 +143,88 @@
               <p class="timeline-org">Institute of Artificial Intelligence | Platform and Engineering Department</p>
               <p class="timeline-description">Code LLM Evaluation Researcher</p>
             </div>
+            <div class="timeline-detail">
+              <div class="experience-letter">
+                <div class="experience-letter-image">
+                  <!-- 在这里放图片，例如：<img src="images/caict.jpg" alt="CAICT"> -->
+                </div>
+                <p class="experience-letter-greeting">Notes on my time at CAICT,</p>
+                <p>
+                  At <strong>CAICT</strong>, I focused on <strong>evaluation and benchmarking of code LLMs</strong>.
+                  I participated in building evaluation pipelines, designing task sets, and
+                  analyzing the behavior of different models under realistic engineering constraints.
+                </p>
+                <p>
+                  The work involved both <strong>quantitative metrics</strong> (pass@k, robustness, latency)
+                  and <strong>qualitative analysis</strong> (error patterns, refactoring quality, security concerns),
+                  which deepened my understanding of what it really means for a model to be "useful" in production.
+                </p>
+                <p class="experience-letter-sign">— Mingda</p>
+              </div>
+            </div>
           </div>
-          <div class="timeline-item">
+          <div
+            class="timeline-item"
+            data-company="Kuaishou"
+            data-period="2025.03 - 2025.07"
+            data-org="Commercialization Algorithm Department"
+            data-role="AIGC Algorithm Intern"
+          >
             <div class="timeline-marker"></div>
             <div class="timeline-content">
               <time class="timeline-date">2025.03-2025.07</time>
               <h3 class="timeline-title">Kuaishou</h3>
               <p class="timeline-org">Commercialization Algorithm Department</p>
               <p class="timeline-description">AIGC Algorithm Intern</p>
+            </div>
+            <div class="timeline-detail">
+              <div class="experience-letter">
+                <div class="experience-letter-image">
+                  <!-- 在这里放图片，例如：<img src="images/kuaishou.jpg" alt="Kuaishou"> -->
+                </div>
+                <p>
+                  At <strong>Kuaishou</strong>, I joined the <strong>Commercialization Algorithm</strong> team as an
+                  <strong>AIGC Algorithm Intern</strong>, working on text and creative generation for ads and
+                  commercialization scenarios.
+                </p>
+                <p>
+                  I helped explore prompt engineering, model fine-tuning, and ranking strategies that connect
+                  generated content with user intent and advertiser objectives, while keeping an eye on safety
+                  and platform policies.
+                </p>
+                <p class="experience-letter-sign">— Mingda</p>
               </div>
+            </div>
           </div>
-          <div class="timeline-item">
+          <div
+            class="timeline-item"
+            data-company="Baidu"
+            data-period="2024.09 - 2025.01"
+            data-org="Intelligent Vision R&D Department"
+            data-role="OCR Algorithm Intern"
+          >
             <div class="timeline-marker"></div>
             <div class="timeline-content">
               <time class="timeline-date">2024.09-2025.01</time>
               <h3 class="timeline-title">Baidu</h3>
               <p class="timeline-org">Intelligent Vision R&D Department</p>
               <p class="timeline-description">OCR Algorithm Intern</p>
+            </div>
+            <div class="timeline-detail">
+              <div class="experience-letter">
+                <div class="experience-letter-image">
+                  <!-- 在这里放图片，例如：<img src="images/baidu.jpg" alt="Baidu"> -->
+                </div>
+                <p>
+                  At <strong>Baidu</strong>, I worked in the <strong>Intelligent Vision R&D Department</strong> as an
+                  <strong>OCR Algorithm Intern</strong>, focusing on document understanding and visual text recognition.
+                </p>
+                <p>
+                  My work covered data processing, model training, and error analysis for OCR pipelines deployed
+                  in real products, which gave me hands-on experience with multimodal perception systems.
+                </p>
+                <p class="experience-letter-sign">— Mingda</p>
+              </div>
             </div>
           </div>
         </div>
@@ -384,6 +484,19 @@
 
   <!-- Particles Background -->
   <div class="particles" id="particles"></div>
+
+  <!-- Experience Detail Modal -->
+  <div class="experience-modal" id="experienceModal" aria-hidden="true">
+    <div class="experience-modal-backdrop" data-experience-close></div>
+    <div class="experience-modal-content" role="dialog" aria-modal="true" aria-labelledby="experienceModalTitle">
+      <button class="experience-modal-close" type="button" data-experience-close>&times;</button>
+      <div class="experience-modal-header">
+        <h3 id="experienceModalTitle" class="experience-modal-title">Experience Detail</h3>
+        <p class="experience-modal-meta" id="experienceModalMeta"></p>
+      </div>
+      <div class="experience-modal-body" id="experienceModalBody"></div>
+    </div>
+  </div>
   
   <script src="script.js"></script>
 </body>

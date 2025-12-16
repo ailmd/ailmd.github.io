@@ -631,6 +631,11 @@ a, button, input, textarea, select, [role="button"], [tabindex], .project-card, 
     0 0 6px rgba(57, 255, 20, 0.9),
     0 0 16px rgba(57, 255, 20, 0.9);
   border: 2px solid #ffffff10;
+  cursor: grab;
+}
+
+.research-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
 }
 
 .research-slider::-moz-range-thumb {
@@ -642,6 +647,11 @@ a, button, input, textarea, select, [role="button"], [tabindex], .project-card, 
     0 0 6px rgba(57, 255, 20, 0.9),
     0 0 16px rgba(57, 255, 20, 0.9);
   border: 2px solid #ffffff10;
+  cursor: grab;
+}
+
+.research-slider::-moz-range-thumb:active {
+  cursor: grabbing;
 }
 
 .research-slider::-moz-range-track {
@@ -849,6 +859,154 @@ a, button, input, textarea, select, [role="button"], [tabindex], .project-card, 
   line-height: 1.8;
 }
 
+.timeline-item {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.timeline-content {
+  padding: 12px 16px;
+  border-radius: 4px;
+  background: transparent;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline-item:hover .timeline-content {
+  background: rgba(15, 26, 15, 0.85);
+  box-shadow: var(--glow-sm);
+}
+
+.timeline-detail {
+  display: none;
+}
+
+/* Experience 详情弹窗 - 大尺寸统一格式 */
+.experience-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.experience-modal.open {
+  display: flex;
+}
+
+.experience-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.experience-modal-content {
+  position: relative;
+  max-width: 1000px;
+  width: 90%;
+  max-height: 90vh;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-lg), var(--glow-md);
+  padding: var(--spacing-lg);
+  z-index: 1;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+.experience-modal-title {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--green-glow);
+  font-weight: 600;
+}
+
+.experience-modal-meta {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.experience-modal-body {
+  margin-top: var(--spacing-md);
+}
+
+.experience-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-secondary);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.experience-modal-close:hover {
+  border-color: var(--green-glow);
+  color: var(--green-glow);
+  box-shadow: var(--glow-sm);
+}
+
+/* 信笺风格正文 - 支持图片 */
+.experience-letter {
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),
+    linear-gradient(to bottom, rgba(57, 255, 20, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 28px;
+  border-radius: 6px;
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-secondary);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+}
+
+.experience-letter-image {
+  width: 100%;
+  margin-bottom: var(--spacing-md);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.experience-letter-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid var(--border-secondary);
+}
+
+.experience-letter p {
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+  line-height: 2;
+  font-size: 16px;
+}
+
+.experience-letter-greeting {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-bottom: 20px;
+}
+
+.experience-letter-sign {
+  text-align: right;
+  margin-top: var(--spacing-md);
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
 /* ============================================
    Contact 部分
    ============================================ */
@@ -863,6 +1021,7 @@ a, button, input, textarea, select, [role="button"], [tabindex], .project-card, 
   color: var(--text-secondary);
   margin-bottom: var(--spacing-lg);
   line-height: 1.8;
+  white-space: nowrap;
 }
 
 .contact-links {
