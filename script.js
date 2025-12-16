@@ -198,6 +198,87 @@ function initParticles() {
 }
 
 // ============================================
+// Research 模块自动横向滚动 + 自定义滚动条联动
+// ============================================
+function initResearchScroll() {
+  const track = document.getElementById('researchTrack');
+  const slider = document.getElementById('researchSlider');
+  if (!track || !slider) return;
+
+  function updateSliderRange() {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    slider._maxScroll = Math.max(0, maxScroll);
+  }
+
+  // 初始与窗口变化时更新最大可滚动距离
+  updateSliderRange();
+  window.addEventListener('resize', updateSliderRange);
+
+  // 滑块拖动时，手动控制滚动位置
+  slider.addEventListener('input', () => {
+    const value = Number(slider.value) / 100; // 0 - 1
+    const maxScroll = slider._maxScroll || 0;
+    track.scrollLeft = value * maxScroll;
+  });
+
+  // 自动从左到右循环滚动
+  let autoScrollId = null;
+  let isPaused = false;
+
+  function syncSliderWithTrack() {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    slider._maxScroll = Math.max(0, maxScroll);
+    if (maxScroll <= 0) {
+      slider.value = 0;
+      return;
+    }
+    const value = track.scrollLeft / maxScroll; // 0-1
+    slider.value = Math.max(0, Math.min(100, value * 100));
+  }
+
+  function startAutoScroll() {
+    if (autoScrollId) return;
+    const step = 0.5; // 单次滚动像素，越大越快（约 120px/s）
+
+    function frame() {
+      if (!isPaused) {
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        slider._maxScroll = Math.max(0, maxScroll);
+        if (maxScroll > 0) {
+          track.scrollLeft += step;
+          // 到末尾后回到开头，形成周而复始
+          if (track.scrollLeft >= maxScroll) {
+            track.scrollLeft = 0;
+          }
+          syncSliderWithTrack();
+        }
+      }
+      autoScrollId = requestAnimationFrame(frame);
+    }
+
+    autoScrollId = requestAnimationFrame(frame);
+  }
+
+  function stopAutoScroll() {
+    if (autoScrollId) {
+      cancelAnimationFrame(autoScrollId);
+      autoScrollId = null;
+    }
+  }
+
+  // 鼠标移入卡片区域或轨道时暂停，移出后继续
+  track.addEventListener('mouseenter', () => {
+    isPaused = true;
+  });
+  track.addEventListener('mouseleave', () => {
+    isPaused = false;
+  });
+
+  // 初始化时启动自动滚动
+  startAutoScroll();
+}
+
+// ============================================
 // 页面初始化
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -206,4 +287,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimation();
   initNavScroll();
   initParticles();
+  initResearchScroll();
 });

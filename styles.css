@@ -491,7 +491,35 @@ a, button, input, textarea, select, [role="button"], [tabindex], .project-card, 
   gap: var(--spacing-md);
 }
 
+/* Research 横向滚动容器 */
+.research-scroll-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.research-scroll-track {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding-bottom: var(--spacing-sm);
+  scrollbar-width: none; /* Firefox 隐藏原生滚动条 */
+}
+
+.research-scroll-track::-webkit-scrollbar {
+  display: none; /* WebKit 隐藏原生滚动条 */
+}
+
+/* 横向排列的 Research 卡片轨道 */
+.research-grid-horizontal {
+  display: inline-flex;
+  gap: var(--spacing-md);
+  min-width: 100%;
+}
+
 .research-card {
+  min-width: 320px;
+  max-width: 360px;
   padding: var(--spacing-md);
   background: var(--bg-card);
   border: 1px solid var(--border-primary);
@@ -564,6 +592,62 @@ a, button, input, textarea, select, [role="button"], [tabindex], .project-card, 
   font-size: 12px;
   font-family: var(--font-mono);
   border-radius: 2px;
+}
+
+/* Research 自定义荧光绿滚动条 */
+.research-scrollbar-wrapper {
+  width: 100%;
+  padding-top: var(--spacing-xs);
+  position: relative;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.research-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    rgba(57, 255, 20, 0.2),
+    rgba(57, 255, 20, 0.6),
+    rgba(57, 255, 20, 0.2)
+  );
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(57, 255, 20, 0.35);
+}
+
+.research-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #39ff14;
+  box-shadow:
+    0 0 6px rgba(57, 255, 20, 0.9),
+    0 0 16px rgba(57, 255, 20, 0.9);
+  border: 2px solid #ffffff10;
+}
+
+.research-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #39ff14;
+  box-shadow:
+    0 0 6px rgba(57, 255, 20, 0.9),
+    0 0 16px rgba(57, 255, 20, 0.9);
+  border: 2px solid #ffffff10;
+}
+
+.research-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: transparent;
 }
 
 /* ============================================

@@ -134,54 +134,114 @@
     <!-- Research Section -->
     <section id="research" class="content-section">
       <div class="section-header">
-        <span class="section-number">02</span>
+        <span class="section-number">03</span>
         <h2 class="section-title">Research</h2>
         <div class="section-line"></div>
       </div>
       <div class="section-content">
-        <div class="research-grid">
-          <article class="research-card">
-            <div class="card-header">
-              <span class="card-number">01</span>
-              <h3>Large Language Models</h3>
+        <div class="research-scroll-wrapper">
+          <div class="research-scroll-track" id="researchTrack">
+            <div class="research-grid research-grid-horizontal">
+              <!-- 第一轮 Research 卡片 -->
+              <article class="research-card">
+                <div class="card-header">
+                  <span class="card-number">01</span>
+                  <h3>Large Language Models</h3>
+                </div>
+                <p class="card-description">
+                  Investigating architectural optimizations, training strategies, and efficiency improvements for large-scale language models. Focus on balancing model performance with computational efficiency.
+                </p>
+                <div class="card-tags">
+                  <span>Architecture</span>
+                  <span>Training</span>
+                  <span>Optimization</span>
+                </div>
+              </article>
+              <article class="research-card">
+                <div class="card-header">
+                  <span class="card-number">02</span>
+                  <h3>AI Agents</h3>
+                </div>
+                <p class="card-description">
+                  Researching decision-making mechanisms, multi-agent collaboration, and autonomous learning capabilities. Developing practical applications for intelligent agent systems.
+                </p>
+                <div class="card-tags">
+                  <span>Decision Making</span>
+                  <span>Multi-Agent</span>
+                  <span>Autonomous Learning</span>
+                </div>
+              </article>
+              <article class="research-card">
+                <div class="card-header">
+                  <span class="card-number">03</span>
+                  <h3>Vision-Language Models</h3>
+                </div>
+                <p class="card-description">
+                  Exploring multimodal understanding and generation, focusing on deep fusion of visual and linguistic information to enhance cross-modal capabilities.
+                </p>
+                <div class="card-tags">
+                  <span>Multimodal</span>
+                  <span>Vision</span>
+                  <span>Language</span>
+                </div>
+              </article>
+
+              <!-- 第二轮重复卡片，用于周而复始视觉效果 -->
+              <article class="research-card">
+                <div class="card-header">
+                  <span class="card-number">04</span>
+                  <h3>Large Language Models</h3>
+                </div>
+                <p class="card-description">
+                  Investigating architectural optimizations, training strategies, and efficiency improvements for large-scale language models. Focus on balancing model performance with computational efficiency.
+                </p>
+                <div class="card-tags">
+                  <span>Architecture</span>
+                  <span>Training</span>
+                  <span>Optimization</span>
+                </div>
+              </article>
+              <article class="research-card">
+                <div class="card-header">
+                  <span class="card-number">05</span>
+                  <h3>AI Agents</h3>
+                </div>
+                <p class="card-description">
+                  Researching decision-making mechanisms, multi-agent collaboration, and autonomous learning capabilities. Developing practical applications for intelligent agent systems.
+                </p>
+                <div class="card-tags">
+                  <span>Decision Making</span>
+                  <span>Multi-Agent</span>
+                  <span>Autonomous Learning</span>
+                </div>
+              </article>
+              <article class="research-card">
+                <div class="card-header">
+                  <span class="card-number">06</span>
+                  <h3>Vision-Language Models</h3>
+                </div>
+                <p class="card-description">
+                  Exploring multimodal understanding and generation, focusing on deep fusion of visual and linguistic information to enhance cross-modal capabilities.
+                </p>
+                <div class="card-tags">
+                  <span>Multimodal</span>
+                  <span>Vision</span>
+                  <span>Language</span>
+                </div>
+              </article>
             </div>
-            <p class="card-description">
-              Investigating architectural optimizations, training strategies, and efficiency improvements for large-scale language models. Focus on balancing model performance with computational efficiency.
-            </p>
-            <div class="card-tags">
-              <span>Architecture</span>
-              <span>Training</span>
-              <span>Optimization</span>
-            </div>
-          </article>
-          <article class="research-card">
-            <div class="card-header">
-              <span class="card-number">02</span>
-              <h3>AI Agents</h3>
-            </div>
-            <p class="card-description">
-              Researching decision-making mechanisms, multi-agent collaboration, and autonomous learning capabilities. Developing practical applications for intelligent agent systems.
-            </p>
-            <div class="card-tags">
-              <span>Decision Making</span>
-              <span>Multi-Agent</span>
-              <span>Autonomous Learning</span>
-            </div>
-          </article>
-          <article class="research-card">
-            <div class="card-header">
-              <span class="card-number">03</span>
-              <h3>Vision-Language Models</h3>
-            </div>
-            <p class="card-description">
-              Exploring multimodal understanding and generation, focusing on deep fusion of visual and linguistic information to enhance cross-modal capabilities.
-            </p>
-            <div class="card-tags">
-              <span>Multimodal</span>
-              <span>Vision</span>
-              <span>Language</span>
-            </div>
-          </article>
+          </div>
+          <div class="research-scrollbar-wrapper">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="0"
+              id="researchSlider"
+              class="research-slider"
+              aria-label="Scroll research topics"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -189,7 +249,7 @@
     <!-- Projects Section -->
     <section id="projects" class="content-section">
       <div class="section-header">
-        <span class="section-number">03</span>
+        <span class="section-number">04</span>
         <h2 class="section-title">Projects</h2>
         <div class="section-line"></div>
       </div>
@@ -232,7 +292,7 @@
     <!-- Blog Section -->
     <section id="blog" class="content-section">
       <div class="section-header">
-        <span class="section-number">04</span>
+        <span class="section-number">05</span>
         <h2 class="section-title">Blog</h2>
         <div class="section-line"></div>
       </div>
