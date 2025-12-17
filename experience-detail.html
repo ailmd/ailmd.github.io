@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mingda Liu - Experience Detail">
+  <title>工作经历详情 | Mingda Liu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="main-nav" id="mainNav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">AI</a>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#experience">Experience</a>
+        <a href="index.html#research">Research</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="index.html#blog">Blog</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <section class="content-section experience-detail-section">
+      <div class="experience-detail-header">
+        <a href="index.html#experience" class="experience-back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          <span>Back to List</span>
+        </a>
+        <div class="experience-detail-meta">
+          <time class="experience-detail-date" id="experienceDate"></time>
+          <h1 class="experience-detail-title" id="experienceTitle"></h1>
+          <p class="experience-detail-org" id="experienceOrg"></p>
+          <p class="experience-detail-role" id="experienceRole"></p>
+        </div>
+      </div>
+
+      <div class="experience-detail-body">
+        <div class="experience-letter" id="experienceContent">
+          <!-- 内容将通过JavaScript动态加载 -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-content">
+      <p>&copy; 2024 Mingda Liu. All rights reserved.</p>
+      <p class="footer-tagline">Exploring the future of AI, one research at a time.</p>
+    </div>
+  </footer>
+
+  <!-- Particles Background -->
+  <div class="particles" id="particles"></div>
+
+  <script src="script.js"></script>
+  <script>
+    // 智能图片加载函数 - 自动尝试多种格式，支持单张或多张图片
+    function createImageElement(imageName, altText, container) {
+      const formats = ['png', 'jpg', 'jpeg', 'webp'];
+      const imgDiv = document.createElement('div');
+      imgDiv.className = 'experience-letter-image';
+      
+      const img = document.createElement('img');
+      img.alt = altText;
+      let currentFormatIndex = 0;
+      
+      function tryNextFormat() {
+        if (currentFormatIndex < formats.length) {
+          img.src = `images/${imageName}.${formats[currentFormatIndex]}`;
+          currentFormatIndex++;
+        } else {
+          // 所有格式都失败，隐藏图片容器
+          imgDiv.style.display = 'none';
+        }
+      }
+      
+      img.onerror = tryNextFormat;
+      img.onload = function() {
+        // 图片加载成功，停止尝试其他格式
+        img.onerror = null;
+      };
+      
+      imgDiv.appendChild(img);
+      container.insertBefore(imgDiv, container.firstChild); // 插入到内容开头
+      tryNextFormat(); // 开始尝试第一个格式
+    }
+    
+    // 加载多张图片的函数
+    function createMultipleImages(imageNames, altText, container) {
+      if (!imageNames || imageNames.length === 0) return;
+      
+      // 创建图片容器组
+      const imagesContainer = document.createElement('div');
+      imagesContainer.className = 'experience-images-grid';
+      
+      // 根据图片数量添加相应的类名
+      if (imageNames.length === 1) {
+        imagesContainer.classList.add('single-image');
+      } else if (imageNames.length === 2) {
+        imagesContainer.classList.add('two-images');
+      }
+      
+      // 为每张图片创建元素
+      imageNames.forEach((imageName, index) => {
+        const formats = ['png', 'jpg', 'jpeg', 'webp'];
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'experience-letter-image';
+        
+        const img = document.createElement('img');
+        img.alt = `${altText} - 图片 ${index + 1}`;
+        let currentFormatIndex = 0;
+        
+        function tryNextFormat() {
+          if (currentFormatIndex < formats.length) {
+            img.src = `images/${imageName}.${formats[currentFormatIndex]}`;
+            currentFormatIndex++;
+          } else {
+            // 所有格式都失败，隐藏这张图片
+            imgDiv.style.display = 'none';
+          }
+        }
+        
+        img.onerror = tryNextFormat;
+        img.onload = function() {
+          img.onerror = null;
+        };
+        
+        imgDiv.appendChild(img);
+        imagesContainer.appendChild(imgDiv);
+        tryNextFormat();
+      });
+      
+      // 将图片组插入到内容开头
+      container.insertBefore(imagesContainer, container.firstChild);
+    }
+    
+    // 根据URL参数加载不同的experience内容
+    const urlParams = new URLSearchParams(window.location.search);
+    const experienceId = urlParams.get('id');
+    
+    // Experience数据 - 包含图片和内容
+    const experiences = {
+      'meituan': {
+        date: '2025.11 - Now',
+        title: 'Meituan',
+        org: 'Core Local Commerce | Meituan App',
+        role: 'AI Agent Product Manager',
+        images: ['meituan'], // 支持多张图片，例如: ['meituan', 'meituan2', 'meituan3']
+        content: `
+          <p class="experience-letter-greeting">To the visitor of this blog,</p>
+          <p>
+            During my time at <strong>Meituan</strong>, I worked as an
+            <strong>AI Agent Product Manager</strong> in the
+            <strong>Core Local Commerce</strong> team. My main focus was designing
+            and iterating agent-style product experiences that connect users,
+            merchants, and logistics in real local-life scenarios.
+          </p>
+          <p>
+            I collaborated closely with algorithm engineers, frontend/backend
+            developers, and operations to turn ambiguous ideas into concrete
+            product specs, evaluation metrics, and launch plans. A big part of my
+            work was balancing model capability, business value, and user trust
+            when deploying large models in production.
+          </p>
+          <p class="experience-letter-sign">— Mingda</p>
+        `
+      },
+      'caict': {
+        date: '2025.07 - 2025.10',
+        title: 'China Academy of Information and Communications Technology (CAICT)',
+        org: 'Institute of Artificial Intelligence | Platform and Engineering Department',
+        role: 'Code LLM Evaluation Researcher',
+        images: ['caict'], // 支持多张图片，例如: ['caict', 'caict2']
+        content: `
+          <p class="experience-letter-greeting">Notes on my time at CAICT,</p>
+          <p>
+            At <strong>CAICT</strong>, I focused on <strong>evaluation and benchmarking of code LLMs</strong>.
+            I participated in building evaluation pipelines, designing task sets, and
+            analyzing the behavior of different models under realistic engineering constraints.
+          </p>
+          <p>
+            The work involved both <strong>quantitative metrics</strong> (pass@k, robustness, latency)
+            and <strong>qualitative analysis</strong> (error patterns, refactoring quality, security concerns),
+            which deepened my understanding of what it really means for a model to be "useful" in production.
+          </p>
+          <p class="experience-letter-sign">— Mingda</p>
+        `
+      },
+      'kuaishou': {
+        date: '2025.03 - 2025.07',
+        title: 'Kuaishou',
+        org: 'Commercialization Algorithm Department',
+        role: 'AIGC Algorithm Intern',
+        images: ['kuaishou'], // 支持多张图片，例如: ['kuaishou', 'kuaishou2']
+        content: `
+          <p class="experience-letter-greeting">Reflections from Kuaishou,</p>
+          <p>
+            At <strong>Kuaishou</strong>, I joined the <strong>Commercialization Algorithm</strong> team as an
+            <strong>AIGC Algorithm Intern</strong>, working on text and creative generation for ads and
+            commercialization scenarios.
+          </p>
+          <p>
+            I helped explore prompt engineering, model fine-tuning, and ranking strategies that connect
+            generated content with user intent and advertiser objectives, while keeping an eye on safety
+            and platform policies.
+          </p>
+          <p class="experience-letter-sign">— Mingda</p>
+        `
+      },
+      'baidu': {
+        date: '2024.09 - 2025.01',
+        title: 'Baidu',
+        org: 'Intelligent Vision R&D Department',
+        role: 'OCR Algorithm Intern',
+        images: ['baidu'], // 支持多张图片，例如: ['baidu', 'baidu2']
+        content: `
+          <p class="experience-letter-greeting">Learning at Baidu,</p>
+          <p>
+            At <strong>Baidu</strong>, I worked in the <strong>Intelligent Vision R&D Department</strong> as an
+            <strong>OCR Algorithm Intern</strong>, focusing on document understanding and visual text recognition.
+          </p>
+          <p>
+            My work covered data processing, model training, and error analysis for OCR pipelines deployed
+            in real products, which gave me hands-on experience with multimodal perception systems.
+          </p>
+          <p class="experience-letter-sign">— Mingda</p>
+        `
+      }
+    };
+    
+    if (experienceId && experiences[experienceId]) {
+      const exp = experiences[experienceId];
+      const contentContainer = document.getElementById('experienceContent');
+      
+      document.getElementById('experienceDate').textContent = exp.date;
+      document.getElementById('experienceTitle').textContent = exp.title;
+      document.getElementById('experienceOrg').textContent = exp.org;
+      document.getElementById('experienceRole').textContent = exp.role;
+      
+      // 先设置文字内容
+      contentContainer.innerHTML = exp.content;
+      
+      // 如果有图片，创建图片元素（支持多张图片）
+      if (exp.images && exp.images.length > 0) {
+        if (exp.images.length === 1) {
+          // 单张图片使用原来的函数
+          createImageElement(exp.images[0], exp.title, contentContainer);
+        } else {
+          // 多张图片使用新的函数
+          createMultipleImages(exp.images, exp.title, contentContainer);
+        }
+      }
+      
+      document.title = `${exp.title} - ${exp.role} | Mingda Liu`;
+    } else {
+      // 如果没有找到对应的experience，显示默认内容
+      document.getElementById('experienceDate').textContent = '';
+      document.getElementById('experienceTitle').textContent = 'Experience Not Found';
+      document.getElementById('experienceOrg').textContent = '';
+      document.getElementById('experienceRole').textContent = '';
+      document.getElementById('experienceContent').innerHTML = '<p>未找到对应的工作经历详情。</p>';
+    }
+  </script>
+</body>
+</html>
+

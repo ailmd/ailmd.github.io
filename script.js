@@ -279,65 +279,10 @@ function initResearchScroll() {
 }
 
 // ============================================
-// Experience 模块弹窗
+// Experience 模块 - 链接跳转（已移除弹窗）
 // ============================================
-function initExperienceModal() {
-  const modal = document.getElementById('experienceModal');
-  if (!modal) return;
-
-  const titleEl = document.getElementById('experienceModalTitle');
-  const metaEl = document.getElementById('experienceModalMeta');
-  const bodyEl = document.getElementById('experienceModalBody');
-
-  function openForItem(item) {
-    const company = item.dataset.company || '';
-    const period = item.dataset.period || '';
-    const org = item.dataset.org || '';
-    const role = item.dataset.role || '';
-
-    titleEl.textContent = `${company} · ${role}`;
-    metaEl.textContent = `${period} · ${org}`;
-
-    const detailTemplate = item.querySelector('.timeline-detail');
-    if (detailTemplate) {
-      bodyEl.innerHTML = detailTemplate.innerHTML;
-    } else {
-      bodyEl.innerHTML = '';
-    }
-
-    modal.classList.add('open');
-    modal.setAttribute('aria-hidden', 'false');
-  }
-
-  function closeModal() {
-    modal.classList.remove('open');
-    modal.setAttribute('aria-hidden', 'true');
-  }
-
-  // 点击关闭区域或按钮关闭
-  modal.querySelectorAll('[data-experience-close]').forEach(el => {
-    el.addEventListener('click', closeModal);
-  });
-
-  // ESC 键关闭
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modal.classList.contains('open')) {
-      closeModal();
-    }
-  });
-
-  // 为每个 timeline-item 绑定点击
-  document.querySelectorAll('.timeline-item').forEach(item => {
-    item.setAttribute('tabindex', '0');
-    item.addEventListener('click', () => openForItem(item));
-    item.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openForItem(item);
-      }
-    });
-  });
-}
+// Experience 现在通过链接直接跳转到详情页面
+// 不需要额外的JavaScript处理
 
 // ============================================
 // 页面初始化
@@ -349,5 +294,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavScroll();
   initParticles();
   initResearchScroll();
-  initExperienceModal();
+  // Experience 模块已改为链接跳转，不再需要弹窗初始化
 });
